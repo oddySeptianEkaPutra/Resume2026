@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oddy Septian — UI/UX Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #111010; --mid: #555; --light: #999;
+    --rule: #e5e3df; --bg: #faf9f7; --accent: #c8602a;
+
+  }
+  html { font-size: 16px; background: var(--bg); color: var(--ink); }
+  body { font-family: 'DM Sans', sans-serif; font-weight: 300; max-width: 780px; margin: 0 auto; padding: 72px 48px 96px; line-height: 1.65; }
+
+  header { margin-bottom: 52px; animation: fadeUp 0.6s ease both; }
+  .name { font-family: 'DM Serif Display', serif; font-size: clamp(2.6rem, 6vw, 3.8rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 10px; }
+  .tagline { font-size: 1rem; color: var(--mid); font-weight: 300; margin-bottom: 20px; }
+  .contact { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 0.83rem; color: var(--mid); }
+  .contact a { color: var(--mid); text-decoration: none; border-bottom: 1px solid var(--rule); transition: color 0.2s, border-color 0.2s; }
+  .contact a:hover { color: var(--accent); border-color: var(--accent); }
+
+  section { margin-bottom: 44px; animation: fadeUp 0.6s ease both; }
+  section:nth-child(2) { animation-delay: 0.08s; }
+  section:nth-child(3) { animation-delay: 0.14s; }
+  section:nth-child(4) { animation-delay: 0.20s; }
+  section:nth-child(5) { animation-delay: 0.26s; }
+  section:nth-child(6) { animation-delay: 0.32s; }
+  section:nth-child(7) { animation-delay: 0.38s; }
+  section:nth-child(8) { animation-delay: 0.44s; }
+
+  .section-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+
+  .profile p { font-size: 0.975rem; color: var(--mid); max-width: 640px; line-height: 1.75; }
+
+  .portfolio-links { display: flex; flex-direction: column; gap: 10px; }
+  .port-link { display: flex; align-items: center; gap: 14px; text-decoration: none; padding: 14px 18px; background: #fff; border: 1px solid var(--rule); border-radius: 6px; transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s; }
+  .port-link:hover { border-color: var(--accent); transform: translateX(4px); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
+  .port-label { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--light); min-width: 110px; }
+  .port-url { font-size: 0.9rem; color: var(--accent); font-weight: 400; }
+  .port-arrow { margin-left: auto; color: var(--rule); font-size: 1rem; transition: color 0.2s, transform 0.2s; }
+  .port-link:hover .port-arrow { color: var(--accent); transform: translateX(2px); }
+
+  .skills-grid { display: grid; gap: 8px; }
+  .skill-row { display: flex; gap: 12px; font-size: 0.875rem; line-height: 1.5; }
+  .skill-key { font-weight: 500; color: var(--ink); min-width: 80px; padding-top: 1px; }
+  .skill-val { color: var(--mid); font-weight: 300; }
+
+  .job { margin-bottom: 30px; }
+  .job:last-child { margin-bottom: 0; }
+  .job-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; margin-bottom: 2px; }
+  .job-company { font-weight: 500; font-size: 0.975rem; color: var(--ink); }
+  .job-dates { font-size: 0.78rem; color: var(--light); font-style: italic; white-space: nowrap; }
+  .job-role { font-size: 0.82rem; color: var(--light); margin-bottom: 10px; font-style: italic; }
+  .job-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .job-bullets li { font-size: 0.875rem; color: var(--mid); font-weight: 300; padding-left: 14px; position: relative; line-height: 1.6; }
+  .job-bullets li::before { content: "–"; position: absolute; left: 0; color: var(--rule); }
+
+  .edu-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; }
+  .edu-school { font-weight: 500; font-size: 0.975rem; color: var(--ink); }
+  .edu-dates { font-size: 0.78rem; color: var(--light); font-style: italic; }
+  .edu-detail { font-size: 0.875rem; color: var(--mid); font-weight: 300; margin-top: 3px; }
+
+  /* ── STATS ── */
+  .stats-band { margin: 0 -48px 44px; padding: 56px 48px; background: #f0ece6; animation: fadeUp 0.6s ease both; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  .stat-box { padding: 28px 20px; background: #fff; text-align: center; }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.8rem; color: var(--accent); line-height: 1; margin-bottom: 6px; letter-spacing: -0.02em; }
+  .stat-label { font-size: 0.72rem; color: var(--light); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 400; }
+
+  /* ── TESTIMONIALS ── */
+  .testi-band { margin: 0 -48px; padding: 56px 48px 64px; background: #f0ece6; animation: fadeUp 0.6s ease both; }
+  .testi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 48px; }
+  .testi-card { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 24px; }
+  .testi-name { font-weight: 500; font-size: 0.9rem; color: var(--ink); margin-bottom: 2px; }
+  .testi-role { font-size: 0.75rem; color: var(--light); margin-bottom: 14px; }
+  .testi-quote { font-size: 0.85rem; color: var(--mid); line-height: 1.7; font-style: italic; font-weight: 300; }
+  .testi-quote::before { content: '"'; color: var(--accent); font-style: normal; }
+  .testi-quote::after { content: '"'; color: var(--accent); font-style: normal; }
+
+  /* CTA */
+  .cta-box { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 40px 36px; text-align: center; }
+  .cta-text { font-family: 'DM Serif Display', serif; font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--ink); line-height: 1.4; margin-bottom: 8px; }
+  .cta-sub { font-size: 0.85rem; color: var(--mid); font-weight: 300; margin-bottom: 28px; line-height: 1.6; }
+  .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 500; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 13px 28px; border-radius: 3px; text-decoration: none; transition: background 0.2s; }
+  .cta-btn:hover { background: #a34d20; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 560px) {
+    body { padding: 40px 24px 72px; }
+    .job-header { flex-direction: column; }
+    .stats-band { margin: 0 -24px 44px; padding: 40px 24px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .testi-band { margin: 0 -24px; padding: 40px 24px 52px; }
+    .testi-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 class="name">Oddy Septian<br>Eka Putra</h1>
+  <p class="tagline">UI/UX Designer · Melbourne, VIC</p>
+  <div class="contact">
+    <span>+61 423 580 054</span>
+    <a href="mailto:oddyseptian28.work@gmail.com">oddyseptian28.work@gmail.com</a>
+  </div>
+</header>
+
+<section class="profile">
+  <p class="section-label">Profile</p>
+  <p>UI/UX designer with 4+ years building web and mobile interfaces — wireframes through to Figma-ready dev handoff. Strong on typographic discipline, animation, and working within established brand systems.</p>
+</section>
+
+<section>
+  <p class="section-label">Portfolio</p>
+  <div class="portfolio-links">
+    <a class="port-link" href="https://bit.ly/osepStudyCase" target="_blank">
+      <span class="port-label">Case Study</span>
+      <span class="port-url">bit.ly/osepStudyCase</span>
+      <span class="port-arrow">→</span>
+    </a>
+    <a class="port-link" href="https://bit.ly/fitpalPrototype" target="_blank">
+      <span class="port-label">Prototype</span>
+      <span class="port-url">bit.ly/fitpalPrototype</span>
+      <span class="port-arrow">→</span>
+    </a>
+    <a class="port-link" href="https://myoddyseptiansite.com" target="_blank">
+      <span class="port-label">Projects Overview</span>
+      <span class="port-url">myoddyseptiansite.com</span>
+      <span class="port-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<section>
+  <p class="section-label">Skills & Tools</p>
+  <div class="skills-grid">
+    <div class="skill-row">
+      <span class="skill-key">Design</span>
+      <span class="skill-val">UI/UX, Wireframing, Prototyping, Interaction Design, UX Research</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-key">Figma</span>
+      <span class="skill-val">Named layers, auto-layout, components, variants, dev handoff</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-key">Animation</span>
+      <span class="skill-val">Micro-interactions, responsive animations, Figma prototyping flows</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-key">Web</span>
+      <span class="skill-val">Responsive design, Webflow, HTML, CSS</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="section-label">Experience</p>
+  <div class="job">
+    <div class="job-header">
+      <span class="job-company">Freelance UI/UX Designer</span>
+      <span class="job-dates">May 2021 – Present</span>
+    </div>
+    <p class="job-role">Remote / Melbourne</p>
+    <ul class="job-bullets">
+      <li>End-to-end UI/UX for web and mobile clients — wireframes to high-fidelity Figma and dev handoff.</li>
+      <li>Responsive animations and micro-interactions across multiple platforms.</li>
+      <li>User research and usability testing feeding directly into iterated designs.</li>
+    </ul>
+  </div>
+  <div class="job">
+    <div class="job-header">
+      <span class="job-company">PT Bestari Aditama Persada (BESTADA)</span>
+      <span class="job-dates">Oct 2023 – Feb 2025</span>
+    </div>
+    <p class="job-role">UI/UX Designer · Jakarta, Indonesia</p>
+    <ul class="job-bullets">
+      <li>Led UI/UX across client projects within locked brand systems — mockups, prototypes, and dev-ready Figma files.</li>
+      <li>Presented to stakeholders, ran user testing, and iterated on feedback.</li>
+      <li>Maintained strict typographic and brand consistency across all deliverables.</li>
+    </ul>
+  </div>
+  <div class="job">
+    <div class="job-header">
+      <span class="job-company">PT Bersatu Untuk Karya (At Once)</span>
+      <span class="job-dates">Nov 2022 – Feb 2023</span>
+    </div>
+    <p class="job-role">UI/UX Designer · Jakarta, Indonesia</p>
+    <ul class="job-bullets">
+      <li>Designed UX for Australian clients — Repairy (car service booking) and Flytree (customer reviews).</li>
+      <li>Identified and resolved UX pain points; received positive stakeholder feedback.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <p class="section-label">Education</p>
+  <div class="edu-row">
+    <span class="edu-school">Islamic University of Indonesia</span>
+    <span class="edu-dates">2014 – 2019</span>
+  </div>
+  <p class="edu-detail">Bachelor of Informatics Engineering · GPA 3.86</p>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <p class="section-label">By the Numbers</p>
+  <div class="stats-grid">
+    <div class="stat-box">
+      <div class="stat-num">14</div>
+      <div class="stat-label">Clients</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">19</div>
+      <div class="stat-label">Projects</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Countries</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">8</div>
+      <div class="stat-label">Industries</div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS + CTA -->
+<div class="testi-band">
+  <p class="section-label">What Clients Say</p>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-name">Nancy</div>
+      <div class="testi-role">CEO, BID</div>
+      <p class="testi-quote">I like the attractive and modern appearance of the application and the soft color selection. Great work Oddy.</p>
+    </div>
+    <div class="testi-card">
+      <div class="testi-name">Andy Hamonangan</div>
+      <div class="testi-role">Manager, HSE Department · PertaMC</div>
+      <p class="testi-quote">Simple design that makes it easy for users. The information presented is clear and informative.</p>
+    </div>
+    <div class="testi-card">
+      <div class="testi-name">David</div>
+      <div class="testi-role">CEO, Fitpal</div>
+      <p class="testi-quote">Nice design, interactive, and easy to understand. Good job Oddy. Nice to work with you.</p>
+    </div>
+    <div class="testi-card">
+      <div class="testi-name">Qivin Tang</div>
+      <div class="testi-role">CEO, Repairy</div>
+      <p class="testi-quote">Oddy consistently gave 100 percent effort to the team and provided great feedback and ideas. He has a great work ethic and excellent graphic designing skills.</p>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <p class="cta-text">Ready to build your next web or mobile experience?</p>
+    <p class="cta-sub">I'm ready to translate your needs into a seamless digital product.<br>Based in Melbourne — available for full-time and freelance.</p>
+    <a class="cta-btn" href="mailto:oddyseptian28.work@gmail.com">Let's Work Together</a>
+  </div>
+</div>
+
+</body>
+</html>
